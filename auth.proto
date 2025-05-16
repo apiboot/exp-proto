@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "generated/pb";
+
+package auth;
+
+service auth {
+    rpc Login(LoginRequest) returns (AuthResponse) {}
+    rpc SignUp(LoginRequest) returns (AuthResponse) {}
+}
+
+message LoginRequest {
+    string tenant = 1;
+    string userId = 2;
+    string password = 3;
+}
+
+message AuthResponse {
+    string jwt = 1;
+
+    // For client reference only. API requests will be authorized with userType from encrypted JWT.
+    string userType = 2;
+}
